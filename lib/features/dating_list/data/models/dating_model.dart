@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:matchify/features/dating_list/domain/entities/dating_entity.dart';
 
 class DatingModel {
@@ -65,18 +66,19 @@ class User {
     );
   }
 
-  // Convert User to DatingEntity
   DatingEntity toEntity() {
     return DatingEntity(
-      fullName: "${name.first} ${name.last}",
-      gender: gender,
-      email: email,
-      birthDate: DateTime.parse(dob.date).toString(),
-      age: dob.age,
-      phone: phone,
-      profilePicture: picture.large,
-      country: location.country,
-    );
+        fullName: "${name.first} ${name.last}",
+        gender: gender,
+        email: email,
+        birthDate: DateTime.parse(dob.date).toString(),
+        age: dob.age,
+        phone: phone,
+        profilePicture: NetworkImage(picture.large),
+        country: location.country,
+        title: name.title,
+        distance: '3 km from you',
+        time: '08:00 PM');
   }
 }
 

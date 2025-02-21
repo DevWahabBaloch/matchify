@@ -5,11 +5,12 @@ import 'package:matchify/features/dating_list/domain/repositories/date_repositor
 
 class DatingRepoImple implements DateRepository {
   final apiService = DatingApiService();
+
   @override
   Future<List<DatingEntity>> getDatingEvents() async {
     try {
-      List<DatingModel> models = await apiService.fetchDatingEvents();
-      return models.expand((model) => model.toEntityList()).toList();
+      DatingModel model = await apiService.fetchDatingEvents();
+      return model.toEntityList();
     } catch (e) {
       throw Exception("Repository Error: $e");
     }

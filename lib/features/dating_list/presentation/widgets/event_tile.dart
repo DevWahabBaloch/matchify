@@ -9,6 +9,7 @@ class EventTile extends StatelessWidget {
   final String location;
   final String startDate;
   final String time;
+  final NetworkImage image;
 
   const EventTile(
       {super.key,
@@ -17,7 +18,8 @@ class EventTile extends StatelessWidget {
       required this.distance,
       required this.location,
       required this.startDate,
-      required this.time});
+      required this.time,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class EventTile extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.04, vertical: height * 0.02),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,9 +72,7 @@ class EventTile extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: CircleAvatar(
-                          backgroundImage: AssetImage(
-                            Assets.images.pic.path,
-                          ),
+                          backgroundImage: image,
                         ),
                       ),
                       SizedBox(width: width * 0.02),

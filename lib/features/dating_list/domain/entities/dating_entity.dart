@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class DatingEntity {
   final String fullName;
   final String gender;
@@ -5,8 +7,11 @@ class DatingEntity {
   final String birthDate;
   final int age;
   final String phone;
-  final String profilePicture;
+  final NetworkImage profilePicture;
   final String country;
+  final String title;
+  final String distance;
+  final String time;
 
   DatingEntity({
     required this.fullName,
@@ -17,5 +22,8 @@ class DatingEntity {
     required this.phone,
     required this.profilePicture,
     required this.country,
+    required this.title,
+    required this.distance,
+    required this.time,
   });
 }

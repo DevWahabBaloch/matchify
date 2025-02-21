@@ -31,7 +31,7 @@ class _DatingListState extends State<DatingList> {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.02),
-        child: SingleChildScrollView(
+        child: Expanded(
           child: Column(
             children: [
               Padding(
@@ -86,19 +86,23 @@ class _DatingListState extends State<DatingList> {
                   if (state is LoadingState) {
                     return const CircularProgressIndicator();
                   } else if (state is LoadedState) {
-                    return ListView.builder(
-                      itemCount: state.events.length,
-                      itemBuilder: (context, index) {
-                        final event = state.events[index];
-                        return EventTile(
-                          name: event.fullName,
-                          title: '',
-                          distance: '',
-                          location: event.country,
-                          startDate: event.birthDate,
-                          time: '',
-                        );
-                      },
+                    return SizedBox(
+                      height: height * 0.9,
+                      child: ListView.builder(
+                        itemCount: state.events.length,
+                        itemBuilder: (context, index) {
+                          final event = state.events[index];
+                          return EventTile(
+                            name: event.fullName,
+                            title: event.title,
+                            distance: event.distance,
+                            location: event.country,
+                            startDate: event.birthDate,
+                            time: event.time,
+                            image: event.profilePicture,
+                          );
+                        },
+                      ),
                     );
                   } else if (state is FailureState) {
                     return Center(

@@ -7,14 +7,15 @@ import 'package:matchify/features/dating_list/data/models/dating_model.dart';
 class DatingApiService {
   final dio = Dio();
 
-  Future<List<DatingModel>> fetchDatingEvents() async {
+  Future<DatingModel> fetchDatingEvents() async {
     try {
-      final response = await dio.get(dotenv.env['API_KEY']!, queryParameters: {"page": 1, "results": 10});
-      log('Response: $response');
+      final baseUrl = dotenv.env['BASE_URL'];
+      final response = await dio.get('$baseUrl', queryParameters: {"page": 1, "results": 10});
+      log('Response Data: ${response.data}');
+
       log('API_KEY: ${dotenv.env['API_KEY']}');
       if (response.statusCode == 200) {
-        final List users = response.data['results'];
-        return users.map((data) => DatingModel.fromJson(data)).toList();
+        return DatingModel.fromJson(response.data);
       } else {
         throw Exception('Failed to load users');
       }
