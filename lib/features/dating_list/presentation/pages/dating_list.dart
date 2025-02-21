@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:matchify/core/constants/app_color.dart';
 import 'package:matchify/core/constants/app_strings.dart';
+import 'package:matchify/features/dating_list/data/models/dating_model.dart';
+import 'package:matchify/features/dating_list/data/sources/remote/dating_api_service.dart';
+import 'package:matchify/features/dating_list/presentation/bloc/dating_cubit.dart';
+import 'package:matchify/features/dating_list/presentation/bloc/dating_state.dart';
 import 'package:matchify/features/dating_list/presentation/widgets/event_tile.dart';
 import 'package:matchify/gen/assets.gen.dart';
 
-class DatingList extends StatelessWidget {
+class DatingList extends StatefulWidget {
   const DatingList({super.key});
+
+  @override
+  State<DatingList> createState() => _DatingListState();
+}
+
+class _DatingListState extends State<DatingList> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<DatingCubit>().attemptToLoadData();
+  }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
     double width = MediaQuery.sizeOf(context).width;
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 0.02),
@@ -64,6 +81,33 @@ class DatingList extends StatelessWidget {
                   ),
                 ),
               ),
+              BlocBuilder<DatingCubit, DatingState>(
+                builder: (context, state) {
+                  if (state is LoadingState) {
+                    return const CircularProgressIndicator();
+                  } else if (state is LoadedState) {
+                    return ListView.builder(
+                      itemCount: state.events.length,
+                      itemBuilder: (context, index) {
+                        final event = state.events[index];
+                        return EventTile(
+                          name: event.fullName,
+                          title: '',
+                          distance: '',
+                          location: event.country,
+                          startDate: event.birthDate,
+                          time: '',
+                        );
+                      },
+                    );
+                  } else if (state is FailureState) {
+                    return Center(
+                      child: Text(state.message),
+                    );
+                  }
+                  return Container();
+                },
+              )
             ],
           ),
         ),

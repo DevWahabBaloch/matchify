@@ -7,8 +7,8 @@ class InitialState extends DatingState {}
 class LoadingState extends DatingState {}
 
 class LoadedState extends DatingState {
-  final List<DatingEntity> dates;
-  LoadedState(this.dates);
+  final List<DatingEntity> events;
+  LoadedState(this.events);
 }
 
 class FailureState extends DatingState {

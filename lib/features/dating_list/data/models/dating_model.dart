@@ -71,7 +71,7 @@ class User {
       fullName: "${name.first} ${name.last}",
       gender: gender,
       email: email,
-      birthDate: DateTime.parse(dob.date),
+      birthDate: DateTime.parse(dob.date).toString(),
       age: dob.age,
       phone: phone,
       profilePicture: picture.large,

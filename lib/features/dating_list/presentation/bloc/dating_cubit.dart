@@ -10,8 +10,8 @@ class DatingCubit extends Cubit<DatingState> {
   Future<void> attemptToLoadData() async {
     emit(LoadingState());
     try {
-      final dates = await getDatingEvents();
-      emit(LoadedState(dates));
+      final events = await getDatingEvents();
+      emit(LoadedState(events));
     } catch (e) {
       emit(FailureState("Failed to load events"));
     }

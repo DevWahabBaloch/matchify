@@ -2,7 +2,7 @@ class DatingEntity {
   final String fullName;
   final String gender;
   final String email;
-  final DateTime birthDate;
+  final String birthDate;
   final int age;
   final String phone;
   final String profilePicture;
