@@ -88,24 +88,27 @@ class _DatingListState extends State<DatingList> {
                     if (state is LoadingState) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is LoadedState) {
-                      return ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: state.events.length,
-                        itemBuilder: (context, index) {
-                          final event = state.events[index];
-                          String dobString = event.registeredDate;
-                          DateTime dob = DateTime.parse(dobString);
-                          String formattedDob = DateFormat('yyyy-MM-dd').format(dob);
-                          return EventTile(
-                            name: event.fullName,
-                            title: event.title,
-                            distance: event.distance,
-                            location: event.country,
-                            startDate: formattedDob,
-                            time: event.time,
-                            image: event.profilePicture,
-                          );
-                        },
+                      return RefreshIndicator(
+                        onRefresh: () => context.read<DatingCubit>().attemptToLoadData(),
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: state.events.length,
+                          itemBuilder: (context, index) {
+                            final event = state.events[index];
+                            String dobString = event.registeredDate;
+                            DateTime dob = DateTime.parse(dobString);
+                            String formattedDob = DateFormat('yyyy-MM-dd').format(dob);
+                            return EventTile(
+                              name: event.fullName,
+                              title: event.title,
+                              distance: event.distance,
+                              location: event.country,
+                              startDate: formattedDob,
+                              time: event.time,
+                              image: event.profilePicture,
+                            );
+                          },
+                        ),
                       );
                     } else if (state is FailureState) {
                       return Center(child: Text(state.message));
