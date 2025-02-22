@@ -12,8 +12,10 @@ class DatingEntity {
   final String title;
   final String distance;
   final String time;
+  final String registeredDate;
 
-  DatingEntity({
+  DatingEntity(
+    String date, {
     required this.fullName,
     required this.gender,
     required this.email,
@@ -25,5 +27,6 @@ class DatingEntity {
     required this.title,
     required this.distance,
     required this.time,
+    required this.registeredDate,
   });
 }

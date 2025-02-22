@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:matchify/core/constants/app_color.dart';
 import 'package:matchify/core/constants/app_strings.dart';
 import 'package:matchify/features/dating_list/presentation/bloc/dating_cubit.dart';
@@ -51,14 +53,11 @@ class _DatingListState extends State<DatingList> {
                               Assets.images.arrowLeft.path,
                               color: AppColors.secondaryColor,
                             ),
-                            SizedBox(width: width * 0.24),
-                            const Text(
+                            SizedBox(width: width * 0.21),
+                            Text(
                               AppStrings.datingList,
-                              style: TextStyle(
-                                color: AppColors.secondaryColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: GoogleFonts.montserrat(
+                                  color: AppColors.secondaryColor, fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -68,10 +67,11 @@ class _DatingListState extends State<DatingList> {
                         elevation: 2.0,
                         child: TextField(
                           decoration: InputDecoration(
-                            hintText: 'Search',
-                            prefixIcon: Image.asset(
-                              Assets.images.search.path,
-                              height: height * 0.03,
+                            hintText: AppStrings.search,
+                            hintStyle: GoogleFonts.montserrat(),
+                            prefixIcon: Icon(
+                              Icons.search,
+                              size: height * 0.035,
                             ),
                             border: InputBorder.none,
                           ),
@@ -93,12 +93,15 @@ class _DatingListState extends State<DatingList> {
                         itemCount: state.events.length,
                         itemBuilder: (context, index) {
                           final event = state.events[index];
+                          String dobString = event.registeredDate;
+                          DateTime dob = DateTime.parse(dobString);
+                          String formattedDob = DateFormat('yyyy-MM-dd').format(dob);
                           return EventTile(
                             name: event.fullName,
                             title: event.title,
                             distance: event.distance,
                             location: event.country,
-                            startDate: event.birthDate,
+                            startDate: formattedDob,
                             time: event.time,
                             image: event.profilePicture,
                           );

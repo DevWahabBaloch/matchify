@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:matchify/core/constants/app_color.dart';
+import 'package:matchify/core/constants/app_strings.dart';
 import 'package:matchify/gen/assets.gen.dart';
 
 class EventTile extends StatelessWidget {
@@ -46,7 +48,7 @@ class EventTile extends StatelessWidget {
                       SizedBox(width: width * 0.02),
                       Text(
                         title,
-                        style: const TextStyle(color: AppColors.textColor, fontSize: 20),
+                        style: GoogleFonts.nunito(color: AppColors.textColor, fontSize: 20),
                       )
                     ],
                   ),
@@ -68,7 +70,7 @@ class EventTile extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: AppColors.primaryColor),
+                          border: Border.all(color: AppColors.primaryColor, width: 2),
                           shape: BoxShape.circle,
                         ),
                         child: CircleAvatar(
@@ -79,8 +81,8 @@ class EventTile extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                          Text(distance, style: const TextStyle(fontSize: 12)),
+                          Text(name, style: GoogleFonts.montserrat(fontWeight: FontWeight.bold)),
+                          Text(distance, style: GoogleFonts.workSans(fontSize: 12)),
                         ],
                       ),
                     ],
@@ -117,19 +119,19 @@ class EventTile extends StatelessWidget {
                             height: height * 0.02,
                           ),
                           SizedBox(width: width * 0.02),
-                          const Text(
-                            'Date',
-                            style: TextStyle(color: AppColors.textColor, fontSize: 13, fontWeight: FontWeight.bold),
+                          Text(
+                            AppStrings.date,
+                            style: GoogleFonts.tajawal(color: AppColors.textColor, fontSize: 13, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                       Text(
                         startDate,
-                        style: const TextStyle(color: AppColors.textColor, fontSize: 15, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.tajawal(color: AppColors.textColor, fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         time,
-                        style: const TextStyle(color: AppColors.textColor, fontSize: 15, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.tajawal(color: AppColors.textColor, fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -142,26 +144,24 @@ class EventTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
                             Assets.images.location.path,
                             height: height * 0.02,
                           ),
-                          SizedBox(width: width * 0.02),
-                          const Text(
-                            'Location',
-                            style: TextStyle(color: AppColors.textColor, fontSize: 13, fontWeight: FontWeight.bold),
+                          SizedBox(width: width * 0.01),
+                          Text(
+                            AppStrings.location,
+                            style: GoogleFonts.cairo(color: AppColors.textColor, fontSize: 13, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: width * 0.1),
-                        child: Text(
-                          location,
-                          style: const TextStyle(color: AppColors.textColor, fontSize: 15, fontWeight: FontWeight.bold),
-                        ),
+                      Text(
+                        location,
+                        style: GoogleFonts.quicksand(color: AppColors.textColor, fontSize: 15, fontWeight: FontWeight.bold),
                       ),
+                      SizedBox(width: width * 0.3),
                     ],
                   ),
                 ],

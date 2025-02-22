@@ -7,13 +7,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:matchify/core/di/service_locator.dart';
+import 'package:matchify/features/dating_list/domain/usecases/get_dating_events.dart';
 
 import 'package:matchify/my_app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(MyApp(getDatingEvents: sl<GetDatingEvents>()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
