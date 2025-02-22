@@ -13,7 +13,7 @@ class DatingApiService {
       final response = await dio.get('$baseUrl', queryParameters: {"page": 1, "results": 10});
       log('Response Data: ${response.data}');
 
-      log('API_KEY: ${dotenv.env['API_KEY']}');
+      log('API_KEY: $baseUrl');
       if (response.statusCode == 200) {
         return DatingModel.fromJson(response.data);
       } else {

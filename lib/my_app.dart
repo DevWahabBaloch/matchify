@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matchify/features/dating_list/data/repositories/dating_repo_imple.dart';
+import 'package:matchify/core/di/service_locator.dart';
 import 'package:matchify/features/dating_list/domain/usecases/get_dating_events.dart';
 import 'package:matchify/features/dating_list/presentation/bloc/dating_cubit.dart';
 import 'package:matchify/features/dating_list/presentation/pages/dating_list.dart';
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DatingCubit(GetDatingEvents(DatingRepoImple())),
+      create: (context) => sl<DatingCubit>(),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: DatingList(),

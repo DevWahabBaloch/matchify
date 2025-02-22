@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:matchify/core/constants/app_color.dart';
 import 'package:matchify/core/constants/app_strings.dart';
+import 'package:matchify/core/di/service_locator.dart';
 import 'package:matchify/features/dating_list/presentation/bloc/dating_cubit.dart';
 import 'package:matchify/features/dating_list/presentation/bloc/dating_state.dart';
 import 'package:matchify/features/dating_list/presentation/widgets/event_tile.dart';
@@ -20,7 +21,7 @@ class _DatingListState extends State<DatingList> {
   @override
   void initState() {
     super.initState();
-    context.read<DatingCubit>().attemptToLoadData();
+    sl<DatingCubit>().attemptToLoadData();
   }
 
   @override
@@ -89,7 +90,7 @@ class _DatingListState extends State<DatingList> {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is LoadedState) {
                       return RefreshIndicator(
-                        onRefresh: () => context.read<DatingCubit>().attemptToLoadData(),
+                        onRefresh: () => sl<DatingCubit>().attemptToLoadData(),
                         child: ListView.builder(
                           physics: const BouncingScrollPhysics(),
                           itemCount: state.events.length,
